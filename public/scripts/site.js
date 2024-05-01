@@ -12,6 +12,7 @@ async function fetchEvents() {
     }
 }
 
+
 function displayEvents(events) {
     const eventsContainer = document.querySelector('.events-list');
     eventsContainer.innerHTML = ''; 

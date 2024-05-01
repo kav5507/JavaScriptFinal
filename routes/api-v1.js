@@ -11,7 +11,7 @@ router.get('/api/menu', async (req, res) => {
 router.get('/api/events', async (req, res) => {
     const collection = await getCollection('foodtruck-api', 'events')
     const events = await collection.find({}).toArray()
-    response.json(events)
+    response.json(events);
 })
 
 
