@@ -1,13 +1,11 @@
 const express = require('express')
 
-const app = express();
-const port = process.env.port || 3000;
+const app = express()
+const port = process.env.PORT || 3000
 
-// Middleware
-app.use(express.static('public'));
-app.use(express.json());
-
-app.use(require('./routes/api-v1'))
+app.use(express.json())
+app.use(express.static('public'))
+app.use('/api/events', require('./routes/api-v1'))
 app.use(require('./routes/static'))
 
-app.listen(port, ()=> console.log(`Server is running at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server running: http://localhost:${port}`))
