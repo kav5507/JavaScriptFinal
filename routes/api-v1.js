@@ -79,7 +79,7 @@ router.put('/api/events/:id', async (req, res) => {
             { _id: new ObjectId(id) },
             { /* add stuff here?? */}
         )
-
+        
         
 });
 //delete methods
