@@ -2,7 +2,13 @@ let lasteventId = 0;
 
 const getEvents = async () => {
     const response = await fetch('/api/events')
-    const {id,name,location,dates,hours} = await response.json()
+    const {_id,name,location,dates,hours} = await response.json()
+
+	document.querySelector('.events h3').textContent = name
+	document.querySelector('.menu .location').textContent = location
+    document.querySelector('.menu .dates').textContent = dates
+	document.querySelector('.menu .hours').textContent = hours
+
 }
 
 
@@ -15,9 +21,7 @@ const getMenu = async () => {
     document.querySelector('.menu .price').textContent = price
 }
 
-const DisplayEvents = async () => {
-    // add stuff here 
-}
 
-
+getMenu()
+getEvents()
 

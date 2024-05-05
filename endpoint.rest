@@ -2,4 +2,4 @@
 
 ### Get todos
 
-GET http://localhost:{{port}}/api/events
+GET http://localhost:{{port}}/api/menu
