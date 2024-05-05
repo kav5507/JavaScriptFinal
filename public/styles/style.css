@@ -97,3 +97,24 @@ form {
 input { 
     margin: 2px; 
 }
+
+
+.menu {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.menu h5 {
+  font-size: 1.2em;
+  color: #A8260E;
+}
+
+.menu .description {
+  color: #666;
+}
+
+.menu .price {
+  font-weight: bold;
+}
