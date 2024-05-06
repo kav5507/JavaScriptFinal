@@ -36,34 +36,38 @@ router.get('/api/events/:id', async (req, res) => {
 
 //menu
 router.post('/api/menu', async (req, res) => {
+    // Finish this up at a later time -- @5/5/2024
     const { item } = req.body;
     const collection = await getCollection('foodtruck-api', 'menu');
     const result = await collection.insertOne({ /*add stuff here */ });
-    res.json({ /* add stuff here --> content to add  */ })
+    res.json(result)
 });
 //events
 router.post('/api/events', async (req, res) => {
     const { item } = req.body;
     const collection = await getCollection('foodtruck-api', 'menu');
     const result = await collection.insertOne({ /*add stuff here */ });
-    res.json({ /* add stuff here --> content to add  */ })
+    res.json(result)
 
 });
 //put methods
 
 //menu
 router.put('/api/menu/:id', async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.params;
     const { name, description, price } = req.body;
 
     const collection = await getCollection('foodtruck-api', 'menu');
 
-    
+        // Finish this up -- @5/5/2024
         const result = await collection.updateOne(
             { _id: new ObjectId(id) },
-            { /* add stuff here?? */}
+            { name : "Brownie"},
+            { description : "Gooey Good"},
+            { price : "6.99"},
+            
         )
-
+        
         
 });
 

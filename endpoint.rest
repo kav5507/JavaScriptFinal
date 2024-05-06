@@ -1,5 +1,28 @@
  @port = 3000
 
-### Get todos
+### GET - Methods
 
+// GET - Working
 GET http://localhost:{{port}}/api/menu
+
+// GET by ID - Working
+GET http://localhost:{{port}}/api/menu/662ebfaf560f3b2cc469888e
+
+### POST - Methods
+
+// POST - MENU
+
+### Insert HERE For Testing
+
+// UPDATE / PUT HERE
+
+### Insert HERE For Testing
+
+// UPDATE BY ID?
+
+### Insert HERE For Testing
+
+// DELETE - Works
+
+### DELETE http://localhost:{{port}}/api/menu/:id
+

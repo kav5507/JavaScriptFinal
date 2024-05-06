@@ -1,8 +1,10 @@
 let lasteventId = 0;
 
 const getEvents = async () => {
+
     const response = await fetch('/api/events')
     const {_id,name,location,dates,hours} = await response.json()
+	// I think their is supposed to be a foreach event and then create a tag for these items
 	
 	document.querySelector('.events h3').textContent = name
 	document.querySelector('.menu .location').textContent = location
@@ -13,9 +15,11 @@ const getEvents = async () => {
 
 
 const getMenu = async () => {
+
 	const response = await fetch('/api/menu')
 	const { _id, name, description, price } = await response.json()
-	ignoreId = _id
+	//ignoreId = _ide -- not needed
+	
 	document.querySelector('.menu h5').textContent = name
 	document.querySelector('.menu .description').textContent = description
     document.querySelector('.menu .price').textContent = price
