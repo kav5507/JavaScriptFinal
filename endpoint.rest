@@ -16,12 +16,12 @@
 
 //POST - EVENTS
 
-### POST http://localhost:{{port}}/api/events
+ ### POST http://localhost:{{port}}/api/events
 
 
 // UPDATE - Working On
 
-### Insert HERE For Testing
+PUT http://localhost:{{port}}/api/events/66397a4f147ce085f9316761
 
 // UPDATE BY ID?
 
