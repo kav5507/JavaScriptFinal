@@ -1,11 +1,11 @@
-const { MongoClient, ObjectId } = require('mongodb')
+const {  MongoClient, ObjectId } = require('mongodb')
 
-const uri = process.env.MONGODB_URI || require('./secrets/mongodb.json').uri
-const client = new MongoClient(uri)
+const url = process.env.MONGODB_URL || require('./secrets/mongodb.json').url
+const client = new MongoClient(url)
 
 const getCollection = async (dbName, collectionName) => {
     await client.connect()
     return client.db(dbName).collection(collectionName)
 }
 
-module.export = { getCollection, ObjectId }
+module.exports = { getCollection, ObjectId }

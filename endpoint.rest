@@ -1,0 +1,44 @@
+
+    @id = 66397d44c8d3f3f74b7390b4
+    @port = 3000
+
+### GET - Methods
+
+
+GET http://localhost:{{port}}/api/menu
+//
+
+//Get
+
+GET http://localhost:{{port}}/api/events
+
+// GET by ID - Working GET http://localhost:{{port}}/api/menu/662ebfaf560f3b2cc469888e
+
+### POST - Methods
+
+// POST - MENU
+POST http://localhost:{{port}}/api/menu
+Content-Type: application/json
+
+{
+  "name":"test2",
+  "description":"test2",
+  "price":"test2"
+}
+
+### Insert HERE For Testing
+
+// UPDATE / PUT HERE
+
+### Insert HERE For Testing
+
+// UPDATE BY ID?
+
+### Insert HERE For Testing
+
+PUT http://localhost:{{port}}/api/menu/{{id}}
+Content-Type: application/json
+
+// DELETE - Works
+
+### DELETE http://localhost:{{port}}/api/menu/:id

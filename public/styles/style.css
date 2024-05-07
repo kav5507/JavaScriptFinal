@@ -97,3 +97,18 @@ form {
 input { 
     margin: 2px; 
 }
+
+#menu table {
+  border-style: none;
+  width: 100%;
+}
+
+#menu td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#menu tr:nth-child(even) {
+  background-color: #dddddd;
+}
