@@ -127,3 +127,88 @@ background-color: #dddddd;
   #events tr:nth-child(even) {
   background-color: #dddddd;
   }
+
+  input, button { 
+    margin: 5px; 
+}
+
+
+.menu {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.menu h5 {
+  font-size: 1.2em;
+  color: #A8260E;
+}
+
+.menu .description {
+  color: #666;
+}
+
+.menu .price {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+}
+
+#menu, #events {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-top: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color:  #A8260E;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
