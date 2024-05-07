@@ -3,18 +3,23 @@
 ### GET - Methods
 
 // GET - Working
-GET http://localhost:{{port}}/api/menu
+### GET http://localhost:{{port}}/api/menu
 
 // GET by ID - Working
-GET http://localhost:{{port}}/api/menu/662ebfaf560f3b2cc469888e
+### GET http://localhost:{{port}}/api/menu/662ebfaf560f3b2cc469888e
 
-### POST - Methods
+### POST - Methods - Working
 
 // POST - MENU
 
-### Insert HERE For Testing
+### POST http://localhost:{{port}}/api/menu
 
-// UPDATE / PUT HERE
+//POST - EVENTS
+
+### POST http://localhost:{{port}}/api/events
+
+
+// UPDATE - Working On
 
 ### Insert HERE For Testing
 
