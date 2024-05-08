@@ -112,3 +112,27 @@ input {
 #menu tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+#events table {
+  border-style: none;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+#events td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  
+}
+
+
+
+#events tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#eventHeaders table {
+  border-style: none;
+  width: 100%;
+}
