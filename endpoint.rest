@@ -5,7 +5,7 @@
 ### GET - Methods
 
 
-GET http://localhost:{{port}}/api/menu
+GET http://localhost:{{port}}/api/menu/{{id}}
 //
 
 //Get

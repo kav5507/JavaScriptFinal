@@ -100,4 +100,47 @@
 		}
 		
 	})
+
+	const getMenuSelectItems = async (menu) => {
+		const selectItem = document.querySelector('#selectItem')
+		menu.forEach(({_id}) => {
+			const option = document.createElement('option')
+			option.setAttribute("value", _id)
+			option.innerHTML = _id
+			selectItem.appendChild(option)
+		})
+	}
+
+	const getEventSelectEvents = async (events) => {
+		const selectEvent = document.querySelector('#selectEvent')
+		events.forEach(({_id}) => {
+			const option = document.createElement('option')
+			option.setAttribute("value", _id)
+			option.innerHTML = _id
+			selectEvent.appendChild(option)
+		})
+	}
+	 
+	const populateItems = async () => {
+		const itemName = document.querySelector('#menuName-input')
+		const id = document.querySelector('#selectItem').value
+		console.log(itemName, id)
+		const response = await fetch(`/api/menu/${id}`)
+		console.log(response)
+		const {name, description, price } = await response.json()
+		console.log(name)
+		itemName.innerHTML = name
+	}
+
+
+	const btnAddItem = document.querySelector('#formAddItem')
+	const btnAddEvent = document.querySelector('#formAddEvent')
+	const selectItem = document.querySelector('#selectItem')
+	selectItem.addEventListener('change', populateItems)
+
+	const selectEvent = document.querySelector('#selectEvent')
+
+	getMenuSelectItems(await getMenu())
+	getEventSelectEvents(await getEvents())
+
 })()
