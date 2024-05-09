@@ -21,7 +21,7 @@ router.get('/api/events', async (req, res) => {
 router.get('/api/menu/:id', async (req, res) => {
     const { id } = req.params;
     const collection = await getCollection('foodtruck-api', 'menu');
-    const menu = await collection.findOne({ "_id": new ObjectId(id) });
+    const menu = await collection.findOne({ _id: new ObjectId(id) });
     res.json(menu)
 })
 

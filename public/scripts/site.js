@@ -103,35 +103,103 @@
 
 	const getMenuSelectItems = async (menu) => {
 		const selectItem = document.querySelector('#selectItem')
-		menu.forEach(({_id}) => {
+		menu.forEach(({_id, name, description, price}) => {
 			const option = document.createElement('option')
 			option.setAttribute("value", _id)
-			option.innerHTML = _id
+			option.innerHTML = name
 			selectItem.appendChild(option)
+
+			
 		})
 	}
 
 	const getEventSelectEvents = async (events) => {
 		const selectEvent = document.querySelector('#selectEvent')
-		events.forEach(({_id}) => {
+		events.forEach(({_id, name}) => {
 			const option = document.createElement('option')
 			option.setAttribute("value", _id)
-			option.innerHTML = _id
+			option.innerHTML = name
 			selectEvent.appendChild(option)
 		})
 	}
 	 
 	const populateItems = async () => {
-		const itemName = document.querySelector('#menuName-input')
-		const id = document.querySelector('#selectItem').value
-		console.log(itemName, id)
+		const option = document.querySelector('#selectItem')
+		const id = option.options[option.selectedIndex].value
+		
+		console.log(id)
+			
 		const response = await fetch(`/api/menu/${id}`)
-		console.log(response)
-		const {name, description, price } = await response.json()
-		console.log(name)
-		itemName.innerHTML = name
+		const menu = await response.json()
+		menu.forEach(({_id, name, description, price}) => {
+			if (menu._id = id) {
+				console.log('yes')
+			}
+			
+
+		})
+
+		
 	}
 
+	// added this for test
+	const populateMenuItemDetails = async () => {
+		const menuId = document.querySelector('#selectItem').value;
+		const response = await fetch(`/api/menu/${_id}`);
+		const { name, description, price } = await response.json();
+		
+		document.querySelector('#menuName-input').value = name;
+		document.querySelector('#menuDescription-input').value = description;
+		document.querySelector('#menuPrice-input').value = price;
+	};
+	
+	const populateEventDetails = async () => {
+		const eventId = document.querySelector('#selectEvent').value;
+		const response = await fetch(`/api/events/${_id}`);
+		const { name, location, dates, hours } = await response.json();
+		
+		document.querySelector('#eventName-input').value = name;
+		document.querySelector('#eventLocation-input').value = location;
+		document.querySelector('#eventDates-input').value = dates;
+		document.querySelector('#eventHours-input').value = hours;
+	};
+	
+	// Dawson -- Working on update and delete
+	
+
+
+	// Delete
+
+	const deleteMenuItem = async () => {
+		const menuId = document.querySelector('#selectItem').value;
+		const response = await fetch(`/api/menu/${menuId}`, {
+			method: 'DELETE'
+		});
+	
+		if (response.ok) {
+			console.log('Menu item deleted successfully');
+			// Optionally, remove the item from the dropdown or refresh the list
+			document.querySelector(`#selectItem option[value="${menuId}"]`).remove();
+		} else {
+			console.error('Failed to delete the menu item');
+		}
+	};
+	
+	const deleteEvent = async () => {
+		const eventId = document.querySelector('#selectEvent').value;
+		const response = await fetch(`/api/events/${eventId}`, {
+			method: 'DELETE'
+		});
+	
+		if (response.ok) {
+			console.log('Event deleted successfully');
+			// Optionally, remove the item from the dropdown or refresh the list
+			document.querySelector(`#selectEvent option[value="${eventId}"]`).remove();
+		} else {
+			console.error('Failed to delete the event');
+		}
+	};
+	
 
 	const btnAddItem = document.querySelector('#formAddItem')
 	const btnAddEvent = document.querySelector('#formAddEvent')
@@ -139,6 +207,18 @@
 	selectItem.addEventListener('change', populateItems)
 
 	const selectEvent = document.querySelector('#selectEvent')
+
+
+	document.querySelector('#btnDeleteItem').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		deleteMenuItem();
+	});
+	
+	document.querySelector('#btnDeleteEvent').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		deleteEvent();
+	});
+	
 
 	getMenuSelectItems(await getMenu())
 	getEventSelectEvents(await getEvents())

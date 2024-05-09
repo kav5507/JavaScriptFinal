@@ -1,18 +1,20 @@
 
-    @id = 66397d44c8d3f3f74b7390b4
+    @id = 662ebed8b933068f3a44e389
     @port = 3000
 
 ### GET - Methods
 
 
-GET http://localhost:{{port}}/api/menu/{{id}}
+//GET http://localhost:{{port}}/api/menu
 //
 
 //Get
 
-GET http://localhost:{{port}}/api/events
+//GET http://localhost:{{port}}/api/events
 
-// GET by ID - Working GET http://localhost:{{port}}/api/menu/662ebfaf560f3b2cc469888e
+// GET by ID - Working 
+
+GET http://localhost:{{port}}/api/menu/66381f3d86fe5ec6b8e609ba
 
 ### POST - Methods
 
@@ -38,6 +40,39 @@ Content-Type: application/json
 
 PUT http://localhost:{{port}}/api/menu/{{id}}
 Content-Type: application/json
+
+// DELETE - Works
+
+### DELETE http://localhost:{{port}}/api/menu/:id
+
+
+
+    @port = 3000
+
+### GET - Methods
+
+// GET - Working ### GET http://localhost:{{port}}/api/menu
+
+// GET by ID - Working ### 
+GET http://localhost:{{port}}/api/menu/66381f3d86fe5ec6b8e609ba
+
+### POST - Methods - Working
+
+// POST - MENU
+
+    ###POST http://localhost:{{port}}/api/menu
+
+//POST - EVENTS
+
+    ### POST http://localhost:{{port}}/api/events
+
+// UPDATE - Working On
+
+PUT http://localhost:{{port}}/api/events/66397a4f147ce085f9316761
+
+// UPDATE BY ID?
+
+### Insert HERE For Testing
 
 // DELETE - Works
 
