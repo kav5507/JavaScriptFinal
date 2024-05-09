@@ -38,24 +38,18 @@ router.get('/api/events/:id', async (req, res) => {
 //menu
 router.post('/api/menu', async (req, res) => {
     // Finish this up at a later time -- @5/5/2024
-    const { item } = req.body;
+    const { name, description, price } = req.body;
     const collection = await getCollection('foodtruck-api', 'menu');
-    const result = await collection.insertOne({ _id : new ObjectId,
-                                                name : "test",
-                                                description : "test",
-                                                price : "1.99" });
+    const result = await collection.insertOne({ name, description, price });
     res.json(result)
 })
 
 //events
 router.post('/api/events', async (req, res) => {
-    const { item } = req.body;
+    const { name, location, dates, hours } = req.body;
     const collection = await getCollection('foodtruck-api', 'events');
-    const result = await collection.insertOne({ _id : new ObjectId,
-                                                name : "test",
-                                                location : "test",
-                                                dates : "test",
-                                                hours : "test"});
+    const result = await collection.insertOne({ name, location, dates, hours });
+
     res.json(result)
 
 })

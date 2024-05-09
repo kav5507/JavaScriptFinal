@@ -153,7 +153,59 @@
 		document.querySelector('#eventDates-input').value = dates;
 		document.querySelector('#eventHours-input').value = hours;
 	};
+	// Insert
+	const addItem = async () => {
+		const name = document.getElementById('menuName-input').value;
+		const description = document.getElementById('menuDescription-input').value;
+		const price = document.getElementById('menuPrice-input').value;
 	
+		const response = await fetch('/api/menu', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ name, description, price })
+		});
+	
+		if (response.ok) {
+			console.log('Added');
+		} else {
+			console.error('Failed');
+		}
+	};
+	
+	document.querySelector('#formAddItem').addEventListener('submit', function(event) {
+		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
+		addItem();
+	});
+	
+	const addEvent = async () => {
+		const name = document.getElementById('eventName-input').value;
+		const location = document.getElementById('eventLocation-input').value;
+		const dates = document.getElementById('eventDates-input').value;
+		const hours = document.getElementById('eventHours-input').value;
+
+		const response = await fetch('/api/events', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ name, location, dates, hours })
+		});
+	
+		if (response.ok) {
+			console.log('Added');
+		} else {
+			console.error('Failed');
+		}
+	};
+	
+	document.querySelector('#formAddEvent').addEventListener('submit', function(event) {
+		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
+		addEvent();
+	});
+
+
 	// Dawson -- Working on update and delete
 	
 
