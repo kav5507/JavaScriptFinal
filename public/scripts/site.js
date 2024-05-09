@@ -254,22 +254,25 @@
 		addEvent();
 	});
 
-	/*const updateMenuItem = async () => {
-		const menuId = document.querySelector('#selectItem').value;
-		const name = document.querySelector('#txtEditMenuName').value
-		console.log(name)
-		const response = await fetch(`/api/menu/${menuId}`, {
+	const updateMenuItem = async () => {
+		const id = document.querySelector('#selectItem').value;
+		const name = document.getElementById('txtEditMenuName').value;
+		const description = document.getElementById('txtEditMenuDescription').value;
+		const price = document.getElementById('txtEditMenuPrice').value;
+
+		const response = await fetch(`/api/menu/${id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				name
-				
+			body: JSON.stringify({ name, description, price })
+
 			})
-		});
-    
-        
+			if (response.ok) {
+				console.log('Added');
+			} else {
+				console.error('Failed');
+			}
 	};
-	*/
+	
 
 	// Delete
 

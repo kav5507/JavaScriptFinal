@@ -58,22 +58,12 @@ router.post('/api/events', async (req, res) => {
 router.put('/api/menu/:id', async (req, res) => {
     const { id } = req.params;
     const { name, description, price } = req.body;
+    const item = { name, description, price }
 
     const collection = await getCollection('foodtruck-api', 'menu');
 
-    const result = await collection.updateOne(
-            {_id : new ObjectId(id)},
-            {
-                $set : {
-                    name: name,
-                    description: description,
-                    price: price
-                }
-            }
-           
-        )
-        
-        res.json(result)
+    const result = await collection.updateOne({_id : new ObjectId(id)}, {$set: item})    
+    res.json(result)
         
 });
 
