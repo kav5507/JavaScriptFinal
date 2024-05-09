@@ -130,15 +130,10 @@
 		console.log(id)
 			
 		const response = await fetch(`/api/menu/${id}`)
-		const menu = await response.json()
-		menu.forEach(({_id, name, description, price}) => {
-			if (menu._id = id) {
-				console.log('yes')
-			}
-			
-
-		})
-
+		const item = await response.json()
+		document.querySelector('#txtEditMenuName').value = item.name
+		document.querySelector('#txtEditMenuDescription').value = item.description
+		document.querySelector('#txtEditMenuPrice').value = item.price
 		
 	}
 
