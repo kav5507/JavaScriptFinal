@@ -154,8 +154,42 @@
 		document.querySelector('#eventHours-input').value = hours;
 	};
 	
+	// Dawson -- Working on update and delete
+	
 
 
+	// Delete
+
+	const deleteMenuItem = async () => {
+		const menuId = document.querySelector('#selectItem').value;
+		const response = await fetch(`/api/menu/${menuId}`, {
+			method: 'DELETE'
+		});
+	
+		if (response.ok) {
+			console.log('Menu item deleted successfully');
+			// Optionally, remove the item from the dropdown or refresh the list
+			document.querySelector(`#selectItem option[value="${menuId}"]`).remove();
+		} else {
+			console.error('Failed to delete the menu item');
+		}
+	};
+	
+	const deleteEvent = async () => {
+		const eventId = document.querySelector('#selectEvent').value;
+		const response = await fetch(`/api/events/${eventId}`, {
+			method: 'DELETE'
+		});
+	
+		if (response.ok) {
+			console.log('Event deleted successfully');
+			// Optionally, remove the item from the dropdown or refresh the list
+			document.querySelector(`#selectEvent option[value="${eventId}"]`).remove();
+		} else {
+			console.error('Failed to delete the event');
+		}
+	};
+	
 
 	const btnAddItem = document.querySelector('#formAddItem')
 	const btnAddEvent = document.querySelector('#formAddEvent')
@@ -163,6 +197,18 @@
 	selectItem.addEventListener('change', populateItems)
 
 	const selectEvent = document.querySelector('#selectEvent')
+
+
+	document.querySelector('#btnDeleteItem').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		deleteMenuItem();
+	});
+	
+	document.querySelector('#btnDeleteEvent').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		deleteEvent();
+	});
+	
 
 	getMenuSelectItems(await getMenu())
 	getEventSelectEvents(await getEvents())
