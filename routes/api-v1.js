@@ -37,41 +37,35 @@ router.get('/api/events/:id', async (req, res) => {
 //menu
 router.post('/api/menu', async (req, res) => {
     // Finish this up at a later time -- @5/5/2024
-    const { item } = req.body;
+    const { name, description, price} = req.body;
     const collection = await getCollection('foodtruck-api', 'menu');
-    const result = await collection.insertOne({ _id : new ObjectId,
-                                                name : "test",
-                                                description : "test",
-                                                price : "1.99" });
+    const result = await collection.insertOne({ _id: new ObjectId(), name, description, price})
     res.json(result)
 });
+
 //events
 router.post('/api/events', async (req, res) => {
-    const { item } = req.body;
+    const { name, location, dates, hours } = req.body;
     const collection = await getCollection('foodtruck-api', 'events');
-    const result = await collection.insertOne({ _id : new ObjectId,
-                                                name : "test",
-                                                location : "test",
-                                                dates : "test",
-                                                hours : "test"});
+    const result = await collection.insertOne({ _id : new ObjectId(), name, location, dates, hours})
     res.json(result)
 
 });
 //put methods
 
 //menu
+
 router.put('/api/menu/:id', async (req, res) => {
     const { id } = req.params;
     const { name, description, price } = req.body;
 
     const collection = await getCollection('foodtruck-api', 'menu');
-    const events = await collection.findOne({ _id: new ObjectId(id) });
 
-        const result = await collection.updateOne(
+    const result = await collection.updateOne(
             {_id : new ObjectId(id)},
             {
                 $set : {
-                    name : name,
+                    name: name,
                     description: description,
                     price: price
                 }
@@ -82,6 +76,7 @@ router.put('/api/menu/:id', async (req, res) => {
         res.json(result)
         
 });
+
 //events
 router.put('/api/events/:id', async (req, res) => {
     const { id } = req.params;

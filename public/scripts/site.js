@@ -177,7 +177,7 @@
 
 	}
 
-	// added this for test
+	/* added this for test
 	const populateMenuItemDetails = async () => {
 		const menuId = document.querySelector('#selectItem').value;
 		const response = await fetch(`/api/menu/${_id}`);
@@ -198,23 +198,78 @@
 		document.querySelector('#eventDates-input').value = dates;
 		document.querySelector('#eventHours-input').value = hours;
 	};
+	*/
 	
 	// Dawson -- Working on update and delete
 	
-	const updateMenuItem = async () => {
+	// Insert
+	const addItem = async () => {
+		const name = document.getElementById('menuName-input').value;
+		const description = document.getElementById('menuDescription-input').value;
+		const price = document.getElementById('menuPrice-input').value;
+	
+		const response = await fetch('/api/menu', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ name, description, price })
+		});
+	
+		if (response.ok) {
+			console.log('Added');
+		} else {
+			console.error('Failed');
+		}
+	};
+	
+	document.querySelector('#formAddItem').addEventListener('submit', function(event) {
+		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
+		addItem();
+	});
+	
+	const addEvent = async () => {
+		const name = document.getElementById('eventName-input').value;
+		const location = document.getElementById('eventLocation-input').value;
+		const dates = document.getElementById('eventDates-input').value;
+		const hours = document.getElementById('eventHours-input').value;
+
+		const response = await fetch('/api/events', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ name, location, dates, hours })
+		});
+	
+		if (response.ok) {
+			console.log('Added');
+		} else {
+			console.error('Failed');
+		}
+	};
+	
+	document.querySelector('#formAddEvent').addEventListener('submit', function(event) {
+		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
+		addEvent();
+	});
+
+	/*const updateMenuItem = async () => {
 		const menuId = document.querySelector('#selectItem').value;
+		const name = document.querySelector('#txtEditMenuName').value
+		console.log(name)
 		const response = await fetch(`/api/menu/${menuId}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
-			body: {
-				name: document.querySelector('#txtEditMenuName').value,
-				description: document.querySelector('#txtEditMenuDescription').value,
-				price: document.querySelector('#txtEditMenuPrice').value
-			}
+			body: JSON.stringify({
+				name
+				
+			})
 		});
     
         
 	};
+	*/
 
 	// Delete
 
@@ -228,6 +283,9 @@
 			console.log('Menu item deleted successfully');
 			// Optionally, remove the item from the dropdown or refresh the list
 			document.querySelector(`#selectItem option[value="${menuId}"]`).remove();
+			document.querySelector('#txtEditMenuName').value = ""
+			document.querySelector('#txtEditMenuDescription').value = ""
+			document.querySelector('#txtEditMenuPrice').value = ""
 		} else {
 			console.error('Failed to delete the menu item');
 		}
@@ -243,6 +301,10 @@
 			console.log('Event deleted successfully');
 			// Optionally, remove the item from the dropdown or refresh the list
 			document.querySelector(`#selectEvent option[value="${eventId}"]`).remove();
+			document.querySelector('#txtEditEventName').value = ""
+			document.querySelector('#txtEditEventLocation').value = ""
+			document.querySelector('#txtEditEventDates').value = ""
+			document.querySelector('#txtEditEventHours').value = "" 
 		} else {
 			console.error('Failed to delete the event');
 		}
