@@ -201,7 +201,20 @@
 	
 	// Dawson -- Working on update and delete
 	
-
+	const updateMenuItem = async () => {
+		const menuId = document.querySelector('#selectItem').value;
+		const response = await fetch(`/api/menu/${menuId}`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: {
+				name: document.querySelector('#txtEditMenuName').value,
+				description: document.querySelector('#txtEditMenuDescription').value,
+				price: document.querySelector('#txtEditMenuPrice').value
+			}
+		});
+    
+        
+	};
 
 	// Delete
 
@@ -253,6 +266,11 @@
 	document.querySelector('#btnDeleteEvent').addEventListener('click', function(event) {
 		event.preventDefault(); // Prevent form submission
 		deleteEvent();
+	});
+
+	document.querySelector('#btnUpdateItem').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		updateMenuItem();
 	});
 	
 
