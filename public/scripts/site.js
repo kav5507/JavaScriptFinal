@@ -2,6 +2,15 @@
 
 	const eventlist = document.querySelector('#events table')
 	const menutable = document.querySelector('#menu table')
+
+	//resets fields to autopopulate
+	document.querySelector('#txtEditMenuName').value = ""
+	document.querySelector('#txtEditMenuDescription').value = ""
+	document.querySelector('#txtEditMenuPrice').value = ""
+	document.querySelector('#txtEditEventName').value = ""
+	document.querySelector('#txtEditEventLocation').value = ""
+	document.querySelector('#txtEditEventDates').value = ""
+	document.querySelector('#txtEditEventHours').value = ""
 	
 
 	const getEvents = async () => {
@@ -103,18 +112,25 @@
 
 	const getMenuSelectItems = async (menu) => {
 		const selectItem = document.querySelector('#selectItem')
+		const option = document.createElement('option')
+		option.innerHTML = "Please select a menu item"
+		selectItem.appendChild(option)
+
 		menu.forEach(({_id, name, description, price}) => {
 			const option = document.createElement('option')
 			option.setAttribute("value", _id)
 			option.innerHTML = name
 			selectItem.appendChild(option)
-
-			
 		})
+		
 	}
 
 	const getEventSelectEvents = async (events) => {
 		const selectEvent = document.querySelector('#selectEvent')
+		const option = document.createElement('option')
+		option.innerHTML = "Please select an event"
+		selectEvent.appendChild(option)
+
 		events.forEach(({_id, name}) => {
 			const option = document.createElement('option')
 			option.setAttribute("value", _id)
@@ -126,15 +142,39 @@
 	const populateItems = async () => {
 		const option = document.querySelector('#selectItem')
 		const id = option.options[option.selectedIndex].value
-		
-		console.log(id)
-			
+	
+		if (id === 'Please select a menu item') { 
+			document.querySelector('#txtEditMenuName').value = ""
+			document.querySelector('#txtEditMenuDescription').value = ""
+			document.querySelector('#txtEditMenuPrice').value = ""
+			return
+		}
 		const response = await fetch(`/api/menu/${id}`)
 		const item = await response.json()
 		document.querySelector('#txtEditMenuName').value = item.name
 		document.querySelector('#txtEditMenuDescription').value = item.description
 		document.querySelector('#txtEditMenuPrice').value = item.price
-		
+
+	}
+
+	const populateEvents = async () => {
+		const option2 = document.querySelector('#selectEvent')
+		const id2 = option2.options[option2.selectedIndex].value
+
+		if (id2 === 'Please select an event') { 
+			document.querySelector('#txtEditEventName').value = ""
+			document.querySelector('#txtEditEventLocation').value = ""
+			document.querySelector('#txtEditEventDates').value = ""
+			document.querySelector('#txtEditEventHours').value = "" 
+			return
+		}
+		const response2 = await fetch(`/api/events/${id2}`)
+		const event = await response2.json()
+		document.querySelector('#txtEditEventName').value = event.name
+		document.querySelector('#txtEditEventLocation').value = event.location
+		document.querySelector('#txtEditEventDates').value = event.dates
+		document.querySelector('#txtEditEventHours').value = event.hours
+
 	}
 
 	// added this for test
@@ -198,11 +238,12 @@
 
 	const btnAddItem = document.querySelector('#formAddItem')
 	const btnAddEvent = document.querySelector('#formAddEvent')
+
 	const selectItem = document.querySelector('#selectItem')
 	selectItem.addEventListener('change', populateItems)
 
 	const selectEvent = document.querySelector('#selectEvent')
-
+	selectEvent.addEventListener('change', populateEvents)
 
 	document.querySelector('#btnDeleteItem').addEventListener('click', function(event) {
 		event.preventDefault(); // Prevent form submission
