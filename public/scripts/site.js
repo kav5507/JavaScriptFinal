@@ -204,13 +204,16 @@
 		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
 		addEvent();
 	});
+	// End of Insert Code
+
+	// Update Start
 
 
-	// Dawson -- Working on update and delete
+	// Update End Code
 	
 
 
-	// Delete
+	// Delete Start Code
 
 	const deleteMenuItem = async () => {
 		const menuId = document.querySelector('#selectItem').value;
@@ -242,6 +245,7 @@
 		}
 	};
 	
+	// Delete End Code
 
 	const btnAddItem = document.querySelector('#formAddItem')
 	const btnAddEvent = document.querySelector('#formAddEvent')
