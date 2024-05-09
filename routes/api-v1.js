@@ -20,17 +20,18 @@ router.get('/api/events', async (req, res) => {
 //menu 
 router.get('/api/menu/:id', async (req, res) => {
     const { id } = req.params;
-    const collection = await getCollection('foodtruck-api', 'events');
-    const menu = await collection.findOne({ _id: new ObjectId(id) });
+    const collection = await getCollection('foodtruck-api', 'menu');
+    const menu = await collection.findOne({ "_id": new ObjectId(id) });
     res.json(menu)
-});
+})
+
 //events
 router.get('/api/events/:id', async (req, res) => {
     const { id } = req.params;
     const collection = await getCollection('foodtruck-api', 'events');
     const events = await collection.findOne({ _id: new ObjectId(id) });
     res.json(events)
-});
+})
 
 // post methods
 
@@ -44,7 +45,8 @@ router.post('/api/menu', async (req, res) => {
                                                 description : "test",
                                                 price : "1.99" });
     res.json(result)
-});
+})
+
 //events
 router.post('/api/events', async (req, res) => {
     const { item } = req.body;
@@ -56,27 +58,34 @@ router.post('/api/events', async (req, res) => {
                                                 hours : "test"});
     res.json(result)
 
-});
+})
+
 //put methods
 
 //menu
 router.put('/api/menu/:id', async (req, res) => {
-    const { _id } = req.params;
+    const { id } = req.params;
     const { name, description, price } = req.body;
 
     const collection = await getCollection('foodtruck-api', 'menu');
+    const events = await collection.findOne({ _id: new ObjectId(id) });
 
-        // Finish this up -- @5/5/2024
+    
         const result = await collection.updateOne(
-            { _id: new ObjectId(id) },
-            { name : "Brownie"},
-            { description : "Gooey Good"},
-            { price : "6.99"},
-            
+            {_id : new ObjectId(id)},
+            {
+                $set : {
+                    name : "tessssst",
+                    description: "tessssst",
+                    price: "3.99"
+                }
+            }
+           
         )
         
+        res.json(result)
         
-});
+})
 
 //events
 router.put('/api/events/:id', async (req, res) => {
