@@ -240,10 +240,23 @@
 		document.getElementById('menuDescription-input').value = ""
 		document.getElementById('menuPrice-input').value = ""
 
+		//deletes and reportpulate select options with new item
 		const select = document.querySelector('#selectItem')
 		select.remove()
 
 		const nSelect = document.createElement('select')
+		nSelect.setAttribute('id', 'selectItem')
+		const form = document.querySelector('#formUpdateItem')
+		form.prepend(nSelect)
+		const selectItem = document.querySelector('#selectItem')
+		selectItem.addEventListener('change', populateItems)
+		document.querySelector('#txtEditMenuName').value = ""
+		document.querySelector('#txtEditMenuDescription').value = ""
+		document.querySelector('#txtEditMenuPrice').value = ""
+
+		getMenuSelectItems(await getMenu())
+		
+		
 
 	};
 	
@@ -277,6 +290,23 @@
 		document.getElementById('eventLocation-input').value = ""
 		document.getElementById('eventDates-input').value = ""
 		document.getElementById('eventHours-input').value = ""
+
+		//deletes and reportpulate select options with new event
+		const select = document.querySelector('#selectEvent')
+		select.remove()
+
+		const nSelect = document.createElement('select')
+		nSelect.setAttribute('id', 'selectEvent')
+		const form = document.querySelector('#formUpdateEvent')
+		form.prepend(nSelect)
+		const selectItem = document.querySelector('#selectEvent')
+		selectItem.addEventListener('change', populateEvents)
+		document.querySelector('#txtEditEventName').value = ""
+		document.querySelector('#txtEditEventLocation').value = ""
+		document.querySelector('#txtEditEventDates').value = ""
+		document.querySelector('#txtEditEventHours').value = "" 
+
+		getEventSelectEvents(await getEvents())
 	};
 
 	document.querySelector('#formAddEvent').addEventListener('submit', function(event) {
@@ -351,7 +381,8 @@
 	// Delete
 
 	const deleteMenuItem = async () => {
-		const menuId = document.querySelector('#selectItem').value;
+		const menu = document.querySelector('#selectItem');
+		const menuId = menu.options[menu.selectedIndex].value
 		const response = await fetch(`/api/menu/${menuId}`, {
 			method: 'DELETE'
 		});
@@ -374,7 +405,8 @@
 	});
 	
 	const deleteEvent = async () => {
-		const eventId = document.querySelector('#selectEvent').value;
+		const item = document.querySelector('#selectEvent');
+		const eventId = item.options[item.selectedIndex].value
 		const response = await fetch(`/api/events/${eventId}`, {
 			method: 'DELETE'
 		});

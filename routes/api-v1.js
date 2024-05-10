@@ -92,7 +92,7 @@ router.delete('/api/menu/:id', async (req, res) => {
 //events
 router.delete('/api/events/:id', async (req, res) => {
     const { id } = req.params;
-    const collection = await getCollection('foodtruck-api', 'menu');
+    const collection = await getCollection('foodtruck-api', 'events');
     const result = await collection.deleteOne({ _id: new ObjectId(id) });  
     res.json(result)
 });
