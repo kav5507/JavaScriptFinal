@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 const { getCollection, ObjectId } = require('../foodtruck-db')
 
-// get methods
+//#region GET methods
 router.get('/api/menu', async (req, res) => {
     const collection = await getCollection('foodtruck-api', 'menu')
     const menu = await collection.find({}).toArray()
@@ -14,8 +14,9 @@ router.get('/api/events', async (req, res) => {
     const events = await collection.find({}).toArray()
     res.json(events)
 })
+//#endregion
 
-//get by ID methods
+//#region GET by ID methods
 
 //menu 
 router.get('/api/menu/:id', async (req, res) => {
@@ -32,8 +33,10 @@ router.get('/api/events/:id', async (req, res) => {
     const events = await collection.findOne({ _id: new ObjectId(id) });
     res.json(events)
 })
+//#endregion
 
-// post methods
+//#region POST Methods
+
 
 //menu
 router.post('/api/menu', async (req, res) => {
@@ -53,8 +56,9 @@ router.post('/api/events', async (req, res) => {
     res.json(result)
 
 })
+//#endregion
 
-//put methods
+//#region PUT methods
 
 //menu
 router.put('/api/menu/:id', async (req, res) => {
@@ -106,7 +110,11 @@ router.put('/api/events/:id', async (req, res) => {
         res.json(result)
         
 });
-//delete methods
+
+//#endregion
+
+
+//#region DELETE methods
 
 //menu
 router.delete('/api/menu/:id', async (req, res) => {
@@ -123,7 +131,7 @@ router.delete('/api/events/:id', async (req, res) => {
     const result = await collection.deleteOne({ _id: new ObjectId(id) });  
     res.json(result)
 });
-
+//#endregion
 
 
 

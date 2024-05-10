@@ -3,7 +3,7 @@
 	const eventlist = document.querySelector('#events table')
 	const menutable = document.querySelector('#menu table')
 	
-
+	//#region GET and Display events
 	const getEvents = async () => {
 		const response = await fetch('/api/events')
 		const events = await response.json()
@@ -52,7 +52,9 @@
 			eventlist.appendChild(tdhours)	
 		})
 	}
-	
+	//#endregion
+
+	//#region GET and display menu
 	const getMenu = async () => {
 		const response = await fetch('/api/menu')
 		const menu = await response.json()
@@ -78,13 +80,7 @@
 		})
 	}
 
-	/*
-	const clearTable = async () => {
-		const a = document.querySelector('#events')
-		const b = document.querySelector('table')
-		a.removeChild(b)
-	}
-	*/
+	//#endregion
 
 	
 	displayEventNames(await getEvents())
@@ -153,7 +149,7 @@
 		document.querySelector('#eventDates-input').value = dates;
 		document.querySelector('#eventHours-input').value = hours;
 	};
-	// Insert
+	//#region INSERT/POST - menu
 	const addItem = async () => {
 		const name = document.getElementById('menuName-input').value;
 		const description = document.getElementById('menuDescription-input').value;
@@ -178,7 +174,10 @@
 		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
 		addItem();
 	});
+	//#endregion
 	
+	
+	//#region  INSERT/POST - event
 	const addEvent = async () => {
 		const name = document.getElementById('eventName-input').value;
 		const location = document.getElementById('eventLocation-input').value;
@@ -204,16 +203,16 @@
 		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
 		addEvent();
 	});
-	// End of Insert Code
+	//#endregion
 
-	// Update Start
+	//#region UPDATE/PUT - menu
 
 
-	// Update End Code
+	//#endregion
 	
 
 
-	// Delete Start Code
+	//#region DELETE - menu & event
 
 	const deleteMenuItem = async () => {
 		const menuId = document.querySelector('#selectItem').value;
@@ -245,8 +244,9 @@
 		}
 	};
 	
-	// Delete End Code
+	//#endregion
 
+	
 	const btnAddItem = document.querySelector('#formAddItem')
 	const btnAddEvent = document.querySelector('#formAddEvent')
 	const selectItem = document.querySelector('#selectItem')
