@@ -71,26 +71,13 @@ router.put('/api/menu/:id', async (req, res) => {
 router.put('/api/events/:id', async (req, res) => {
     const { id } = req.params;
     const { name, location, dates, hours } = req.body;
+    const event = { name, location, dates, hours }
 
     const collection = await getCollection('foodtruck-api', 'events');
-    const events = await collection.findOne({ _id: new ObjectId(id) });
 
-    
-        const result = await collection.updateOne(
-            {_id : new ObjectId(id)},
-            {
-                $set : {
-                    name : "Plover Pizza Place",
-                    location : "Plover",
-                    dates : "July 15, 2024",
-                    hours : "10am - 4pm"
-                }
-            }
-           
-        )
-        
-        res.json(result)
-        
+    const result = await collection.updateOne({_id : new ObjectId(id)}, {$set: event})    
+    res.json(result)
+                
 });
 //delete methods
 

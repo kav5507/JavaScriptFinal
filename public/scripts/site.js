@@ -11,14 +11,42 @@
 	document.querySelector('#txtEditEventLocation').value = ""
 	document.querySelector('#txtEditEventDates').value = ""
 	document.querySelector('#txtEditEventHours').value = ""
+	document.getElementById('menuName-input').value = ""
+	document.getElementById('menuDescription-input').value = ""
+	document.getElementById('menuPrice-input').value = ""
+	document.getElementById('eventName-input').value = ""
+	document.getElementById('eventLocation-input').value = ""
+	document.getElementById('eventDates-input').value = ""
+	document.getElementById('eventHours-input').value = ""
+
+
+	const btnAddItem = document.querySelector('#formAddItem')
+	const btnAddEvent = document.querySelector('#formAddEvent')
+
 	
 
+	//for index.html. Reveals hidden elements when specific button is pressed
+	document.querySelectorAll('button').forEach((button) => {
+		button.onclick = function() {
+			const clickedButtonName = button.name
+			
+			const elements = document.querySelectorAll(`.${clickedButtonName}`)
+			for (var i = 0; i < elements.length; i++)
+				{elements[i].style.visibility = "visible"}
+		}
+		
+	})
+
+	
+	
+	
 	const getEvents = async () => {
 		const response = await fetch('/api/events')
 		const events = await response.json()
 		return events
 	}
 
+	//for index.html. Initially displays all events but with details hidden
 	const displayEventNames = async (events) => {
 		events.forEach(({_id, name, location, dates, hours}) => {
 			const tr = document.createElement('tr')	
@@ -68,6 +96,7 @@
 		return menu
 	}
 
+	//for menu.html
 	const displayMenuItems = async (menu) => {
 		menu.forEach(({_id, name, description, price}) => {
 			const tr = document.createElement('tr')
@@ -95,21 +124,7 @@
 	}
 	*/
 
-	
-	displayEventNames(await getEvents())
-	displayMenuItems(await getMenu())
-
-	document.querySelectorAll('button').forEach((c) => {
-		c.onclick = function() {
-			const clickedButtonName = c.name
-			
-			const az = document.querySelectorAll(`.${clickedButtonName}`)
-			for (var i = 0; i < az.length; i++)
-				{az[i].style.visibility = "visible"}
-		}
-		
-	})
-
+	//for admin.html. Gets names for update select options and displays
 	const getMenuSelectItems = async (menu) => {
 		const selectItem = document.querySelector('#selectItem')
 		const option = document.createElement('option')
@@ -125,6 +140,7 @@
 		
 	}
 
+	//for admin.html. Gets names for update select options and displays
 	const getEventSelectEvents = async (events) => {
 		const selectEvent = document.querySelector('#selectEvent')
 		const option = document.createElement('option')
@@ -139,6 +155,7 @@
 		})
 	}
 	 
+	//populates update fields based on selected option
 	const populateItems = async () => {
 		const option = document.querySelector('#selectItem')
 		const id = option.options[option.selectedIndex].value
@@ -157,6 +174,7 @@
 
 	}
 
+	//populates update fields based on selected option
 	const populateEvents = async () => {
 		const option2 = document.querySelector('#selectEvent')
 		const id2 = option2.options[option2.selectedIndex].value
@@ -199,10 +217,9 @@
 		document.querySelector('#eventHours-input').value = hours;
 	};
 	*/
-	
-	// Dawson -- Working on update and delete
-	
+		
 	// Insert
+	
 	const addItem = async () => {
 		const name = document.getElementById('menuName-input').value;
 		const description = document.getElementById('menuDescription-input').value;
@@ -221,11 +238,16 @@
 		} else {
 			console.error('Failed');
 		}
+		document.getElementById('menuName-input').value = ""
+		document.getElementById('menuDescription-input').value = ""
+		document.getElementById('menuPrice-input').value = ""
+
 	};
 	
-	document.querySelector('#formAddItem').addEventListener('submit', function(event) {
-		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
+	document.querySelector('#formAddItem').addEventListener('submit', function(menu) {
+		menu.preventDefault(); // Prevent form submission -- not sure if this is really needed
 		addItem();
+
 	});
 	
 	const addEvent = async () => {
@@ -247,12 +269,20 @@
 		} else {
 			console.error('Failed');
 		}
+
+		document.getElementById('eventName-input').value = ""
+		document.getElementById('eventLocation-input').value = ""
+		document.getElementById('eventDates-input').value = ""
+		document.getElementById('eventHours-input').value = ""
 	};
-	
+
 	document.querySelector('#formAddEvent').addEventListener('submit', function(event) {
 		event.preventDefault(); // Prevent form submission -- not sure if this is really needed
 		addEvent();
+		
 	});
+	
+	//Update
 
 	const updateMenuItem = async () => {
 		const id = document.querySelector('#selectItem').value;
@@ -260,6 +290,7 @@
 		const description = document.getElementById('txtEditMenuDescription').value;
 		const price = document.getElementById('txtEditMenuPrice').value;
 
+		//updates DB 
 		const response = await fetch(`/api/menu/${id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
@@ -271,7 +302,47 @@
 			} else {
 				console.error('Failed');
 			}
+
+			//sets select value to new name
+			const option = document.querySelector('#selectItem')
+			option.options[option.selectedIndex].innerHTML = name 
 	};
+
+	document.querySelector('#btnUpdateItem').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		updateMenuItem();
+	});
+
+	const updateEvent = async () => {
+		const id = document.querySelector('#selectEvent').value;
+		const name = document.getElementById('txtEditEventName').value;
+		const location = document.getElementById('txtEditEventLocation').value;
+		const dates = document.getElementById('txtEditEventDates').value;
+		const hours = document.getElementById('txtEditEventHours').value;
+
+		//updates DB
+		const response = await fetch(`/api/events/${id}`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ name, location, dates, hours})
+
+			})
+			if (response.ok) {
+				console.log('Added');
+
+			} else {
+				console.error('Failed');
+			}
+		
+			//sets select value to new name
+			const option = document.querySelector('#selectEvent')
+			option.options[option.selectedIndex].innerHTML = name 
+	};
+
+	document.querySelector('#btnUpdateEvent').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		updateEvent();
+	});
 	
 
 	// Delete
@@ -293,6 +364,11 @@
 			console.error('Failed to delete the menu item');
 		}
 	};
+
+	document.querySelector('#btnDeleteItem').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		deleteMenuItem();
+	});
 	
 	const deleteEvent = async () => {
 		const eventId = document.querySelector('#selectEvent').value;
@@ -313,33 +389,29 @@
 		}
 	};
 	
+	document.querySelector('#btnDeleteEvent').addEventListener('click', function(event) {
+		event.preventDefault(); // Prevent form submission
+		deleteEvent();
+	});
 
-	const btnAddItem = document.querySelector('#formAddItem')
-	const btnAddEvent = document.querySelector('#formAddEvent')
-
+	//for admin.html. Sets listener on selection change
 	const selectItem = document.querySelector('#selectItem')
 	selectItem.addEventListener('change', populateItems)
 
 	const selectEvent = document.querySelector('#selectEvent')
 	selectEvent.addEventListener('change', populateEvents)
 
-	document.querySelector('#btnDeleteItem').addEventListener('click', function(event) {
-		event.preventDefault(); // Prevent form submission
-		deleteMenuItem();
-	});
-	
-	document.querySelector('#btnDeleteEvent').addEventListener('click', function(event) {
-		event.preventDefault(); // Prevent form submission
-		deleteEvent();
-	});
-
-	document.querySelector('#btnUpdateItem').addEventListener('click', function(event) {
-		event.preventDefault(); // Prevent form submission
-		updateMenuItem();
-	});
-	
+	displayEventNames(await getEvents())
+	displayMenuItems(await getMenu())
 
 	getMenuSelectItems(await getMenu())
 	getEventSelectEvents(await getEvents())
+	
+	
+
+	
+	
+
+
 
 })()
