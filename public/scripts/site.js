@@ -3,41 +3,8 @@
 	const eventlist = document.querySelector('#events table')
 	const menutable = document.querySelector('#menu table')
 
-	//resets fields to autopopulate
-	document.querySelector('#txtEditMenuName').value = ""
-	document.querySelector('#txtEditMenuDescription').value = ""
-	document.querySelector('#txtEditMenuPrice').value = ""
-	document.querySelector('#txtEditEventName').value = ""
-	document.querySelector('#txtEditEventLocation').value = ""
-	document.querySelector('#txtEditEventDates').value = ""
-	document.querySelector('#txtEditEventHours').value = ""
-	document.getElementById('menuName-input').value = ""
-	document.getElementById('menuDescription-input').value = ""
-	document.getElementById('menuPrice-input').value = ""
-	document.getElementById('eventName-input').value = ""
-	document.getElementById('eventLocation-input').value = ""
-	document.getElementById('eventDates-input').value = ""
-	document.getElementById('eventHours-input').value = ""
-
-
-	const btnAddItem = document.querySelector('#formAddItem')
-	const btnAddEvent = document.querySelector('#formAddEvent')
-
 	
 
-	//for index.html. Reveals hidden elements when specific button is pressed
-	document.querySelectorAll('button').forEach((button) => {
-		button.onclick = function() {
-			const clickedButtonName = button.name
-			
-			const elements = document.querySelectorAll(`.${clickedButtonName}`)
-			for (var i = 0; i < elements.length; i++)
-				{elements[i].style.visibility = "visible"}
-		}
-		
-	})
-
-	
 	
 	
 	const getEvents = async () => {
@@ -115,6 +82,37 @@
 			tr.appendChild(tdprice) 
 		})
 	}
+
+	displayEventNames(await getEvents())
+	displayMenuItems(await getMenu())
+
+
+	document.querySelectorAll('button').forEach((c) => {
+		c.onclick = function() {
+			const clickedButtonName = c.name
+			
+			const az = document.querySelectorAll(`.${clickedButtonName}`)
+			for (var i = 0; i < az.length; i++)
+				{az[i].style.visibility = "visible"}
+		}
+		
+	})
+	
+	//resets fields to autopopulate
+	document.querySelector('#txtEditMenuName').value = ""
+	document.querySelector('#txtEditMenuDescription').value = ""
+	document.querySelector('#txtEditMenuPrice').value = ""
+	document.querySelector('#txtEditEventName').value = ""
+	document.querySelector('#txtEditEventLocation').value = ""
+	document.querySelector('#txtEditEventDates').value = ""
+	document.querySelector('#txtEditEventHours').value = ""
+	document.getElementById('menuName-input').value = ""
+	document.getElementById('menuDescription-input').value = ""
+	document.getElementById('menuPrice-input').value = ""
+	document.getElementById('eventName-input').value = ""
+	document.getElementById('eventLocation-input').value = ""
+	document.getElementById('eventDates-input').value = ""
+	document.getElementById('eventHours-input').value = ""
 
 	/*
 	const clearTable = async () => {
@@ -241,6 +239,11 @@
 		document.getElementById('menuName-input').value = ""
 		document.getElementById('menuDescription-input').value = ""
 		document.getElementById('menuPrice-input').value = ""
+
+		const select = document.querySelector('#selectItem')
+		select.remove()
+
+		const nSelect = document.createElement('select')
 
 	};
 	
@@ -401,8 +404,7 @@
 	const selectEvent = document.querySelector('#selectEvent')
 	selectEvent.addEventListener('change', populateEvents)
 
-	displayEventNames(await getEvents())
-	displayMenuItems(await getMenu())
+
 
 	getMenuSelectItems(await getMenu())
 	getEventSelectEvents(await getEvents())
