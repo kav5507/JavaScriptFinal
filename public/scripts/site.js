@@ -366,7 +366,7 @@
 			} else {
 				console.error('Failed');
 			}
-		
+			
 			//sets select value to new name
 			const option = document.querySelector('#selectEvent')
 			option.options[option.selectedIndex].innerHTML = name 
